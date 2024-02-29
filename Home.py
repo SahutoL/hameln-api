@@ -24,7 +24,7 @@ def main():
     filters, filter= query_ui()
 
     if st.button("データ取得"):
-        response = httpx.get(f'http://127.0.0.1:8000/ranking/?filters={filters[filter]}')
+        response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
 
         res = response.json()
         st.write('')
