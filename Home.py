@@ -23,7 +23,8 @@ def main():
     filters, filter= query_ui()
 
     if st.button("データ取得"):
-        response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
+        with httpx.Client(timeout=httpx.Timeout(5.0, read=10.0)) as client:
+            response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
 
         res = response.json()
         st.write('')
