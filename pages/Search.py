@@ -200,7 +200,7 @@ def main():
     input_word, parody, sort = query_ui()
 
     if st.button("データ取得"):
-        response = httpx.get(f'http://127.0.0.1:8000/search/?search_word={input_word}&parodies={parody}&sorts={sort}')
+        response = httpx.get(f'https://hameln-api.onrender.com/search/?search_word={input_word}&parodies={parody}&sorts={sort}')
 
         res = response.json()
         st.write('')
