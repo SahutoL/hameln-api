@@ -1,11 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from typing import Optional,List
-from enum import Enum
+from typing import Union
 
-from fastapi import FastAPI, Query, Depends
-from pydantic.dataclasses import dataclass
+from fastapi import FastAPI, Query
 
 from search import Scraper
 from ranking import Ranking
@@ -202,36 +200,15 @@ sorts = [
     "ランダム",
 ]
 
-appconfig = {"filters": filters, "parodies": parodies, "sorts": sorts}
-
-
-enum_fil = Enum("enum_fil", {str(i):i for i in appconfig['filters']})
-enum_paro = Enum("enum_paro", {str(i):i for i in appconfig['parodies']})
-enum_sort = Enum("enum_sort", {str(i):i for i in appconfig['sorts']})
-
-
-
-@dataclass
-class RankingFilter:
-    filters: Optional[List[enum_fil]] = Query(None)
-
-@dataclass
-class GensakuModel:
-    parodies: Optional[List[enum_paro]] = Query(None)
-
-@dataclass
-class SortModel:
-    sorts: Optional[List[enum_sort]] = Query(None)
-
 
 @app.get("/ranking/", tags=["ranking"])
 async def ranking_hameln(
-    filter: RankingFilter=Depends()
+    filter: Union[str] = Query(None, enum=filters)
     ):
     print(filter)
 
     res = JSONResponse(
-        content=ranking.hameln_ranking(filter.filters[0].value),
+        content=ranking.hameln_ranking(filter),
         media_type="charset=utf-8",
     )
     
@@ -241,18 +218,17 @@ async def ranking_hameln(
 @app.get("/search/", tags=["search"])
 async def search_hameln(
     search_word: str = Query(""),
-    gensaku: GensakuModel=Depends(),
-    sort: SortModel=Depends(),
+    gensaku: Union[str] = Query(None, enum=parodies),
+    sort: Union[str] = Query(None, enum=sorts),
     ):
-
-    parody = str(gensaku.parodies[0].value)
-    if parody == "--原作カテゴリ--":
-        parody = ""
+    
+    if gensaku == "--原作カテゴリ--":
+        gensaku = ""
         
-    search_type = sorts.index(sort.sorts[0].value)
+    search_type = sorts.index(sort)
         
     res = JSONResponse(
-        content=scraper.hameln_search(search_word, parody, search_type),
+        content=scraper.hameln_search(search_word, gensaku, search_type),
         media_type="charset=utf-8",
     )
     
