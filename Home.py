@@ -20,6 +20,7 @@ def query_ui():
 
 def main():
     st.markdown('## ハーメルンランキング')
+    filters, filter= query_ui()
 
     if st.button("データ取得"):
         response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
