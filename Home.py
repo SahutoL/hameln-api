@@ -24,7 +24,7 @@ def main():
 
     if st.button("データ取得"):
         with httpx.Client(timeout=httpx.Timeout(None)) as client:
-            response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
+            response = client.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
 
         res = response.json()
         st.write('')
