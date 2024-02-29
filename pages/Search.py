@@ -185,9 +185,11 @@ def query_ui():
 
     input_word = st.text_input(label='キーワード入力', value='')
     st.write('')
-
-    parody = st.sidebar.selectbox('原作',(parodies),placeholder="原作カテゴリを選択してください")
-    sort = st.sidebar.selectbox('並び替え', (sorts))
+    parody = st.selectbox('原作',(parodies),placeholder="原作カテゴリを選択してください")
+    st.write('')
+    sort = st.selectbox('並び替え', (sorts))
+    st.write('')
+    st.write('')
 
     return input_word, parody, sort
 
