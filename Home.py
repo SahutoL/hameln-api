@@ -23,6 +23,10 @@ def main():
 
     filters, filter= query_ui()
     filters, filter, filters[filter]
+    a = f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}'
+    a
+    
+    
 
     if st.button("データ取得"):
         response = httpx.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
