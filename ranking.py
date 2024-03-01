@@ -12,7 +12,8 @@ class Ranking():
         session = requests.Session()
         page_number = 1
         search_url = 'https://syosetu.org/?mode=rank_{}'.format(filter)
-
+        
+        sleep(1)
         req = session.get(search_url, headers=headers)
 
         elements = bs4.BeautifulSoup(req.text, "html.parser")
