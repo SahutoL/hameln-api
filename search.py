@@ -12,7 +12,8 @@ class Scraper():
         session = requests.Session()
         page_number = 1
         search_url = 'https://syosetu.org/search/?word={}&page={}&gensaku=原作：{}&type={}'.format(search_keyword, page_number, search_gensaku, search_type)
-
+        
+        sleep(1)
         cookie = {'list_num': '50'}
         req = session.get(search_url, headers=headers, cookies=cookie)
 
