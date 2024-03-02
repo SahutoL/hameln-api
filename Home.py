@@ -1,6 +1,10 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 import httpx
 
+st.set_page_config(
+    initial_sidebar_state="collapsed"
+)
 
 def query_ui():
     filters = {
@@ -19,12 +23,24 @@ def query_ui():
 
 
 def main():
+
+    changed = option_menu(None, ["Home", "Search"],
+        icons=['house', 'search'],
+        orientation="horizontal",
+        default_index=0)
+    
+    if changed == "Search":
+        st.switch_page('pages/Search.py')
+        
+    
+    
+    
     st.markdown('## ハーメルンランキング')
     filters, filter= query_ui()
 
     if st.button("データ取得"):
         with httpx.Client(timeout=httpx.Timeout(None)) as client:
-            response = client.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
+            response = client.get(f'http://127.0.0.1:8000/ranking/?filter={filters[filter]}')
 
         res = response.json()
         st.write('')
