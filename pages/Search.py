@@ -214,7 +214,7 @@ def main():
 
     if st.button("データ取得"):
         with httpx.Client(timeout=httpx.Timeout(None)) as client:
-            response = client.get(f'https://hameln-api.onrender.com/?search_word={input_word}&gensaku={parody}&sort={sort}')
+            response = client.get(f'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}')
 
         res = response.json()
         st.write('')
