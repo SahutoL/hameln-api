@@ -1,5 +1,10 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 import httpx
+
+st.set_page_config(
+    initial_sidebar_state="collapsed"
+)
 
 
 def query_ui():
@@ -195,13 +200,21 @@ def query_ui():
 
 
 def main():
+    changed = option_menu(None, ["Home", "Search"],
+        icons=['house', 'search'],
+        orientation="horizontal",
+        default_index=1)
+    
+    if changed == "Home":
+        st.switch_page('Home.py')
+    
     st.markdown('## ハーメルン検索')
 
     input_word, parody, sort = query_ui()
 
     if st.button("データ取得"):
         with httpx.Client(timeout=httpx.Timeout(None)) as client:
-            response = client.get(f'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}')
+            response = client.get(f'http://127.0.0.1:8000/search/?search_word={input_word}&gensaku={parody}&sort={sort}')
 
         res = response.json()
         st.write('')
