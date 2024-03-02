@@ -40,7 +40,7 @@ def main():
 
     if st.button("データ取得"):
         with httpx.Client(timeout=httpx.Timeout(None)) as client:
-            response = client.get(f'http://127.0.0.1:8000/ranking/?filter={filters[filter]}')
+            response = client.get(f'https://hameln-api.onrender.com/ranking/?filter={filters[filter]}')
 
         res = response.json()
         st.write('')
