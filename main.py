@@ -222,7 +222,9 @@ async def search_hameln(
     sort: Union[str] = Query(None, enum=sorts),
     ):
     
-    if gensaku == "--原作カテゴリ--":
+    if gensaku != "--原作カテゴリ--" and gensaku != "その他原作":
+        gensaku = "原作：{}".format(gensaku)
+    if gensaku == "--原作カテゴリ--" and search_word != "":
         gensaku = ""
         
     search_type = sorts.index(sort)
