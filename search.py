@@ -21,7 +21,6 @@ class Scraper():
         parsed_page = elements.select('div.section3')
 
         items = []
-        rank = 1
         for _ in range(1):
             for site in parsed_page:
                 if site.find(attrs={'title': "最新話へのリンク"}).get_text() == "": continue
@@ -40,7 +39,6 @@ class Scraper():
                     "更新日": site.find("div", class_="blo_date").get_text()[:10],
                     "更新時": site.find("div", class_="blo_date").find("div").get_text()
                 }
-                rank += 1
                 items.append(item)
             sleep(1)
             page_number += 1
