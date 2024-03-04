@@ -205,7 +205,6 @@ sorts = [
 async def ranking_hameln(
     filter: Union[str] = Query(None, enum=filters)
     ):
-    print(filter)
 
     res = JSONResponse(
         content=ranking.hameln_ranking(filter),
