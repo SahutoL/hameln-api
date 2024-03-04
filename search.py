@@ -37,7 +37,8 @@ class Scraper():
                     "タグ": site.find("div", class_="all_keyword").get_text().split(" ")[number_aleart_keyword+1:-1],
                     "平均評価": float(site.find("div", class_="blo_hyouka").find(class_="blo_mix").get_text().replace("調整平均：", "")),
                     "更新日": site.find("div", class_="blo_date").get_text()[:10],
-                    "更新時": site.find("div", class_="blo_date").find("div").get_text()
+                    "更新時": site.find("div", class_="blo_date").find("div").get_text(),
+                    "URL": "https:{}".format(site.find("div", class_="blo_title_base").find("a").get("href"))
                 }
                 items.append(item)
             sleep(1)
