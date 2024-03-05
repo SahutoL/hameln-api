@@ -203,7 +203,7 @@ sorts = [
 
 @app.get("/ranking/", tags=["ranking"])
 async def ranking_hameln(
-    filter: Union[str] = Query(None, enum=filters)
+    filter: Union[str] = Query(enum=filters)
     ):
 
     res = JSONResponse(
@@ -217,8 +217,8 @@ async def ranking_hameln(
 @app.get("/search/", tags=["search"])
 async def search_hameln(
     search_word: str = Query(""),
-    gensaku: Union[str] = Query(None, enum=parodies),
-    sort: Union[str] = Query(None, enum=sorts),
+    gensaku: Union[str] = Query(enum=parodies),
+    sort: Union[str] = Query(enum=sorts),
     ):
     
     if gensaku != "--原作カテゴリ--" and gensaku != "その他原作":
