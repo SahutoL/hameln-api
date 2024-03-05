@@ -1,12 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 
 from typing import Union
 
-from fastapi import FastAPI, Query
-
 from search import Scraper
 from ranking import Ranking
+
 app = FastAPI()
 scraper = Scraper()
 ranking = Ranking()
@@ -21,8 +20,8 @@ filters = [
     "total",
 ]
 parodies = [
-    "--原作カテゴリ--",
-    "その他原作",
+	"--原作カテゴリ--",
+	"その他原作",
 	"二次創作",
 	"オリジナル",
 	"ARMORED CORE",
@@ -201,9 +200,10 @@ sorts = [
 ]
 
 
+
 @app.get("/ranking/", tags=["ranking"])
 async def ranking_hameln(
-    filter: Union[str] = Query(enum=filters)
+    filter: Union[str] = Query(enum=filters),
     ):
 
     res = JSONResponse(
@@ -216,7 +216,7 @@ async def ranking_hameln(
 
 @app.get("/search/", tags=["search"])
 async def search_hameln(
-    search_word: str = Query(""),
+    search_word: str = Query(None),
     gensaku: Union[str] = Query(enum=parodies),
     sort: Union[str] = Query(enum=sorts),
     ):
@@ -225,7 +225,7 @@ async def search_hameln(
         gensaku = "原作：{}".format(gensaku)
     if gensaku == "--原作カテゴリ--" and search_word != "":
         gensaku = ""
-        
+            
     search_type = sorts.index(sort)
         
     res = JSONResponse(
@@ -234,4 +234,3 @@ async def search_hameln(
     )
     
     return res
-
