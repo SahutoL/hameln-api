@@ -11,9 +11,8 @@ class Scraper():
 
         session = requests.Session()
         page_number = 1
-        search_url = 'https://syosetu.org/search/?word={}&page={}&gensaku=原作：{}&type={}'.format(search_keyword, page_number, search_gensaku, search_type)
-        
-        sleep(1)
+        search_url = 'https://syosetu.org/search/?word={}&page={}&gensaku={}&type={}'.format(search_keyword, page_number, search_gensaku, search_type)
+
         cookie = {'list_num': '50'}
         req = session.get(search_url, headers=headers, cookies=cookie)
 
@@ -43,7 +42,7 @@ class Scraper():
                 items.append(item)
             sleep(1)
             page_number += 1
-            search_url = 'https://syosetu.org/search/?word={search_keyword}&page={page_number}&gensaku=原作：{search_gensaku}&type={search_type}'
+            search_url = 'https://syosetu.org/search/?word={search_keyword}&page={page_number}&gensaku={search_gensaku}&type={search_type}'
             req = session.get(search_url, headers=headers)
             elements = bs4.BeautifulSoup(req.text, "html.parser")
             parsed_page = elements.select('div.section3')
