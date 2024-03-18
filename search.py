@@ -43,7 +43,7 @@ class Scraper():
             sleep(1)
             page_number += 1
             search_url = 'https://syosetu.org/search/?word={search_keyword}&page={page_number}&gensaku={search_gensaku}&type={search_type}'
-            req = session.get(search_url, headers=headers)
+            req = session.get(search_url, headers=headers, cookies=cookie)
             elements = bs4.BeautifulSoup(req.text, "html.parser")
             parsed_page = elements.select('div.section3')
 
