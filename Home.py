@@ -44,6 +44,12 @@ def main():
 
         res = response.json()
         st.write('')
+        st.code("""
+        curl -X \'GET\' \\
+        \'https://hameln-api.onrender.com/search/?gensaku=&sort=\' \\
+        -H \'accept: application/json\'
+        """
+        st.write('')
         st.json(res)
 
 if __name__ == '__main__':
