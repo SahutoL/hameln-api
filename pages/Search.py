@@ -226,7 +226,7 @@ def main():
               -H \'accept: application/json\'
         """.format(urllib.parse.quote(input_word), urllib.parse.quote(parody), urllib.parse.quote(sort)))
         st.write('')
-        st.json(res[0])
+        st.json(res)
 
 if __name__ == '__main__':
     main()
