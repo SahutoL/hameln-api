@@ -221,8 +221,8 @@ def main():
         st.write('')
         st.code(f"""
         curl -X \'GET\' \\
-  \'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}' \\
-  -H \'accept: application/json\'
+          \'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}' \\
+          -H \'accept: application/json\'
         """)
         st.write('')
         st.json(res)
