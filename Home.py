@@ -46,9 +46,9 @@ def main():
         st.write('')
         st.code("""
             curl -X \'GET\' \\
-            \'https://hameln-api.onrender.com/search/?gensaku=&sort=\' \\
+            \'https://hameln-api.onrender.com/ranking/?filter{}' \\
             -H \'accept: application/json\'
-        """)
+        """.format({filters[filter]))
         st.write('')
         st.json(res)
 
