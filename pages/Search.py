@@ -223,7 +223,7 @@ def main():
         curl -X 'GET' \\
   \'https://hameln-api.onrender.com/search/?search_word={}&gensaku={}&sort={}\' \\
   -H \'accept: application/json\'
-        """.format(input_word, parody, sort)
+        """.format(input_word, parody, sort))
         st.write('')
         st.json(res)
 
