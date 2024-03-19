@@ -218,7 +218,7 @@ def main():
             if input_word == "": input_word = " "
             response = client.get(f'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}')
 
-        res = response.json()
+        res = response[0].json()
         st.write('')
         st.code("""
             curl -X \'GET\' \\
