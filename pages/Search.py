@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import httpx
+import urllib.parse
 
 st.set_page_config(
     initial_sidebar_state="collapsed"
@@ -223,7 +224,7 @@ def main():
             curl -X \'GET\' \\
               \'https://hameln-api.onrender.com/search/?search_word={}\&gensaku={}\&sort={}' \\
               -H \'accept: application/json\'
-        """.format(input_word, parody, sort))
+        """.format(urllib.parse.quote(input_word), urllib.parse.quote(parody), urllib.parse.quote(sort)))
         st.write('')
         st.json(res)
 
