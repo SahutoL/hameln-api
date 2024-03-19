@@ -220,9 +220,9 @@ def main():
         res = response.json()
         st.write('')
         st.code(f"""
-        curl -X \'GET\' \\
-          \'https://hameln-api.onrender.com/search/?search_word={input_word}&gensaku={parody}&sort={sort}' \\
-          -H \'accept: application/json\'
+        curl -X 'GET' \\
+  \'https://hameln-api.onrender.com/search/?gensaku=--%E5%8E%9F%E4%BD%9C%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA--&sort=%E6%9C%80%E7%B5%82%E6%9B%B4%E6%96%B0%E6%97%A5%E6%99%82%28%E6%96%B0%E3%81%97%E3%81%84%E9%A0%86%29\' \\
+  -H \'accept: application/json\'
         """)
         st.write('')
         st.json(res)
