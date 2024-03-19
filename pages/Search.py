@@ -219,7 +219,7 @@ def main():
 
         res = response.json()
         st.write('')
-        st.code(f"""
+        st.code("""
         curl -X \'GET\' \\
   \'https://hameln-api.onrender.com/search/?search_word={}&gensaku={}&sort={}\' \\
   -H \'accept: application/json\'
